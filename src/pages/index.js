@@ -15,15 +15,12 @@ export default function Home() {
         const fetchData = async () => {
             stopper = false;
             try {
-                const res = await fetch(
-                    process.env.NEXT_PUBLIC_TABLE_BACKEND_API,
-                    {
-                        method: 'GET',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                    }
-                );
+                const res = await fetch(process.env.NEXT_PUBLIC_TABLE_BACKEND_API, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
                 const { data } = await res.json();
                 setPosts(data);
                 setCopyPosts(data);
@@ -48,15 +45,12 @@ export default function Home() {
         clearTimeout(timer);
         const newTimer = setTimeout(async () => {
             try {
-                const res = await fetch(
-                    `${process.env.NEXT_PUBLIC_TABLE_BACKEND_API}/search?q=${value}`,
-                    {
-                        method: 'GET',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                    }
-                );
+                const res = await fetch(`${process.env.NEXT_PUBLIC_TABLE_BACKEND_API}/search?q=${value}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
                 const { hits } = await res.json();
                 setPosts(hits);
                 // handle success
@@ -75,22 +69,34 @@ export default function Home() {
         <>
             <Head>
                 <title>{meta.title.value}</title>
-                <meta name="description" content={meta.description.value} />
+                <meta
+                    name="description"
+                    content={meta.description.value}
+                />
                 <meta
                     name="viewport"
                     content="width=device-width, initial-scale=1"
                 />
-                <link rel="icon" href="/favicon.ico" />
+                <link
+                    rel="icon"
+                    href="/favicon.ico"
+                />
             </Head>
             <main>
                 <PoweredBy />
                 <div className="header">
                     <div className="search-input">
-                        <Text h3 my={0}>
+                        <Text
+                            h3
+                            my={0}
+                        >
                             HN Resource Template
                         </Text>
-                        <Text small type="secondary">
-                            Don't miss latest resources shared on the internet.
+                        <Text
+                            small
+                            type="secondary"
+                        >
+                            Do not miss latest resources shared on the internet.
                         </Text>
                         <SubscribeBtn />
                     </div>
@@ -106,7 +112,10 @@ export default function Home() {
                     />
                     <div className="hn-top">
                         {posts.map((post, key) => (
-                            <div className="post-card" key={key}>
+                            <div
+                                className="post-card"
+                                key={key}
+                            >
                                 <div className="post-rank">
                                     <FrameAltEmpty />
                                     <span>{key + 1}</span>
@@ -118,7 +127,10 @@ export default function Home() {
                                         target="_blank"
                                         className="post-title"
                                     >
-                                        <Text h4 my={0}>
+                                        <Text
+                                            h4
+                                            my={0}
+                                        >
                                             {post.title}
                                         </Text>
                                         <Text small>{post.url}</Text>
@@ -127,11 +139,7 @@ export default function Home() {
                                         <div className="post-details">
                                             <div className="options">
                                                 <Calendar />
-                                                <span>
-                                                    {moment(
-                                                        top.created_at
-                                                    ).fromNow()}
-                                                </span>
+                                                <span>{moment(top.created_at).fromNow()}</span>
                                             </div>
                                         </div>
                                     </div>
